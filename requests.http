@@ -1,0 +1,37 @@
+###
+POST http://localhost:3999/api/users HTTP/1.1
+Content-Type: application/json
+
+//
+{
+    "register_user_email":"asd@gmail.com",
+    "register_user_nombre_completo":"gilverto gonzales",
+    "register_fecha_nacimiento":"03/06/1992",
+    "register_user_password":"asdA123",
+    "telefono":"163116",
+    "direccion":"avenida asd",
+    "apart":"Rivera"
+}
+
+
+###
+GET http://localhost:3999/api/users HTTP/1.1
+Content-Type: application/json
+
+
+###
+GET http://localhost:3999/api/users/6433846abf3a6633fb57bfce HTTP/1.1
+Content-Type: application/json
+
+
+###
+PUT http://localhost:3999/api/users/643991e7ef2a272fb0952cdf HTTP/1.1
+Content-Type: application/json
+
+{ 
+   "register_user_password":"dsaA123"
+}
+
+###
+DELETE http://localhost:3999/api/users/ HTTP/1.1
+Content-Type: application/json
