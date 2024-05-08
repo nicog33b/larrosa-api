@@ -1,31 +1,31 @@
 const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors'); //Importamos CORS
-
+const cors = require('cors');
+const connectDB = require('./db/connection');
 require('dotenv').config();
 
+
+//Import of route
+const userRoutes = require('./routes/userRoute');
+const orderRoutes = require('./routes/orderRoutes');
+const productRoutes = require('./routes/productRoutes');
+
+//init app
 const app = express();
-const port = process.env.PORT || 9000;
+const port = process.env.PORT || 3001;
 
-//Rutas.
-const userRoutes = require('./routes/user');
+// Conectar a la base de datos
+connectDB();
 
-//middleware
-app.use(cors()); //Usamos CORS
+// Middleware
+app.use(cors());
 app.use(express.json());
-app.use('/api', userRoutes);
 
 
+// Rutas
+app.use('/api/users', userRoutes); // Usuarios
+app.use('/api/orders', orderRoutes); //Ordenes
+app.use('/api/products', productRoutes); //Productos
 
-//routes
-app.get('/', (req, res) => {
-  res.send('<div>API de la pagina web Homeopatia larrosa.</div>');
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
 });
-
-//mongodb connection
-mongoose
-  .connect(process.env.MONGODB_URI)
-  .then(() => console.log('Conectado a mongoDB'))
-  .catch((error) => console.error(error));
-
-app.listen(port, () => console.log('servidor funcionando. puerto: ', port));
